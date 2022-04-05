@@ -1,0 +1,60 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Category>
+@{
+    ViewData["Title"] = "ListCategories";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<h1>Kategori Listesi</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Aktif Yap</th>
+            <th scope="col">Pasif Yap</th>
+            <th scope="col">Düzenle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row" id="categoryId">@item.CategoryID</th>
+                <td>@item.CategoryName</td>
+                @if (item.CategoryStatus == true)
+                {
+                    
+                    <td><a href="#" id="aktif" class="btn btn-info">Aktif </a></td>
+                    <td><a href="/Admin/Category/MakePasive/@item.CategoryID" id="pasif" onclick="return confirm('Pasif Yapmak İstediğinize Emin misiniz?');" class="btn btn-outline-danger">Pasif </a></td>
+                }
+                else
+                {
+                    <td><a href="/Admin/Category/MakeActive/@item.CategoryID" onclick="return confirm('Aktif Yapmak İstediğinize Emin misiniz?');" class="btn btn-outline-info">Aktif </a></td>
+                  
+                    <td><a href="#" class="btn btn-danger">Pasif </a></td>
+                }
+             
+                <td><a href="/Admin/Category/UpdateCategory/@item.CategoryID" id="delBtn" onclick="return confirm('Güncellemek İstediğinize Emin misiniz?');" class="btn btn-outline-warning">Düzenle</a></td>
+            </tr>
+
+        }
+
+
+
+    </tbody>
+</table>
+
+
+<div class="float-right">
+    <a href="/Admin/Category/ExportStaticExelList" class="btn btn-outline-success">Exel Dosyasını İndir </a>
+    <a href="/Admin/Category/AddCategory" class="btn btn-outline-primary">Yeni Kategori </a>
+    <br />
+    <br />
+    <br />
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("ListCategories", new { page }))
+</div>
+

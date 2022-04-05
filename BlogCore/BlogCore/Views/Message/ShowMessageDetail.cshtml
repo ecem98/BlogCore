@@ -1,0 +1,17 @@
+﻿@model EntityLayer.Concrete.Message2;
+@{
+    ViewData["Title"] = "ShowMessageDetail";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Subject</h5>
+            <div><h6 class="card-subtitle mb-2 text-muted">@Model.SenderUser.WriterName <span class="mailbox-read-time float-right">@(((DateTime) Model.MessageDate).ToString("dd-MMM-yy"))</span></h6></div>
+            <p class="card-text">@Model.MessageDetails</p>
+            <a href="Message/InBox" class="btn btn-outline-success btn-sm"><i class="mdi mdi-share"></i> Mesajlara Dön</a>
+            
+        </div>
+    </div>
+    </div>
+

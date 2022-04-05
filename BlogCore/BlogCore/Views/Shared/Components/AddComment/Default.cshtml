@@ -1,0 +1,36 @@
+﻿@model EntityLayer.Concrete.Comment
+    <div class="comment-top">
+        <h4>bir Yorum Yazın</h4>
+        <div class="comment-bottom">
+           
+                    <form asp-controller="Comment" asp-action="SaveComment" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#CommentList">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+
+                            <input asp-for="CommentUserName" class="form-control" placeholder="İsim" />
+                            <span asp-validation-for="CommentUserName" class="text-danger"></span>
+                            @Html.ValidationMessageFor(x=>x.CommentUserName,"",new {@class="text-danger" })
+                        </div>
+                        <div class="form-group">
+
+                            <input asp-for="CommentTitle" class="form-control" placeholder="Başlık" />
+                            <span asp-validation-for="CommentTitle" class="text-danger"></span>
+                            @Html.ValidationMessageFor(x => x.CommentTitle, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+
+                            <input asp-for="CommentContent" class="form-control" placeholder="Yorumunuz" />
+                            <span asp-validation-for="CommentContent" class="text-danger"></span>
+                            @Html.ValidationMessageFor(x => x.CommentContent, "", new { @class = "text-danger" })
+                        </div>
+                       
+                        
+                        <div class="form-group">
+                            <input type="submit" value="Gönder" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+

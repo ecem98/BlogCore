@@ -1,0 +1,50 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByUser";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Bloglarım</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Başlık</th>
+            <th scope="col">Oluşturma Tarihi</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Durum</th>
+            <th scope="col">Sil</th>
+            <th scope="col">Düzenle</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="row">@item.BlogID</th>
+            <td>@item.BlogTitle</td>
+            <td>@(((DateTime) item.BlogCreatingDate).ToString("dd-MMM-yy"))</td>
+            <td> @item.Category.CategoryName</td>
+            @if (item.BlogStatus)
+            {
+                {
+                    <td><span class="badge badge-success">Aktif</span></td>
+                }
+            }
+                else
+                {
+                    <td><span class="badge badge-secondary">Pasif</span></td>
+                }
+            
+            <td><a href="/Blog/BlogDell/@item.BlogID" class="btn btn-outline-danger btn-sm">Sil</a></td>
+            <td><a href="/Blog/BlogUpdate/@item.BlogID" class="btn btn-outline-warning btn-sm">Güncelle</a></td>
+        </tr>
+        }
+
+
+    </tbody>
+</table>
+<a href="/Blog/BlogAdd" class="btn btn-primary">Yeni Blog Oluşur</a>

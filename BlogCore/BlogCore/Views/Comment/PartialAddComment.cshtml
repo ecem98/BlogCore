@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="comment-top">
+    <h4>bir Yorum Yazın</h4>
+    <div class="comment-bottom">
+
+        <input class="form-control" type="text" name="Name" placeholder="İsim" required="" id="name" style="color:black;">
+        <input class="form-control" type="text" name="Email" placeholder="Başlık" required="" id="baslik" style="color:black;">
+
+        <textarea class="form-control" name="Message" placeholder="Yorumunuz..." required="" id="yorum"></textarea>
+        <button type="submit" class="btn btn-primary submit" id="addComment">Gönder</button>
+        
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+        $("#addComment").click(function () {
+
+            let comment = {
+                CommentUserName: $("#name").val(),
+                CommentTitle: $("#baslik").val(),
+                CommentContent: $("#yorum").val()                
+
+            };
+
+            $.ajax({
+
+                type: "post",
+                url: "@Url.Action("PartialAddComment", "Comment")",
+                data: comment,
+
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    alert(func);
+
+                }
+
+            });
+        });
+
+</script>

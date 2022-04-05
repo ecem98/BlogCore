@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="tech-btm">
+    <h4>Mail bültenine abone olun</h4>
+    <p>Yeni eklenen bloglardan haberdar olun... </p>
+    <div>
+        <input type="email" class="form-control" id="mailAddress" placeholder="Email" required="" name="Mail">
+        <p style="visibility: hidden;" id="yazi">Üye olundu...</p>
+        <button type="button" id="subscribeMail" class="btn btn-outline-info">Abone Ol</button>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+        $("#subscribeMail").click(function () {
+
+            let newsLetter = {
+                Mail: $("#mailAddress").val()
+            };
+
+            $.ajax({
+
+                type: "post",
+                url: "@Url.Action("SubscribeMail", "NewsLetter")",
+                data: newsLetter,
+
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    $("#yazi").addClass("deneme");
+                    alert(func);
+
+                }
+
+            });
+        });
+
+</script>
